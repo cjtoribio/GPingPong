@@ -1,0 +1,31 @@
+<modal #wrappingModal>
+  <material-dialog>
+
+    <h3 header>
+        Enter match results
+    </h3>
+    <div>
+      <material-input label="Player 1" [(ngModel)]="player1.name"></material-input>
+      <material-input label="Player 2" [(ngModel)]="player2.name"></material-input>
+    </div>
+    <div>
+      <material-input label="Score 1"
+                      [(ngModel)]="player1.score"
+                      errorMsg="That's not a number"></material-input>
+      <material-input label="Score 2"
+                      [(ngModel)]="player2.score"
+                      errorMsg="That's not a number"></material-input>
+    </div>
+
+    <div footer>
+      <material-button (trigger)="save()">
+        Save
+      </material-button>
+      <material-button autoFocus
+                       clear-size
+                       (trigger)="wrappingModal.close()">
+        Cancel
+      </material-button>
+    </div>
+  </material-dialog>
+</modal>

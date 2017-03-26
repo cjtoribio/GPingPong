@@ -1,0 +1,6 @@
+bin: 'server/main.dart'
+
+apis:
+  - 'lib/endpoints/sample.dart'
+  - 'lib/endpoints/users.dart'
+  - 'lib/endpoints/matches.dart'
