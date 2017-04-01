@@ -1,7 +1,7 @@
 import 'package:GPingPong/model/single_match.dart';
+import 'package:GPingPong/model/rating.dart';
 import 'dart:math';
 
-import 'package:GPingPong/model/rating.dart';
 
 class Elo {
   static const double MAX_ELO = 3400.0;
@@ -9,10 +9,8 @@ class Elo {
   static const double MAX_WIN_RATE = 1 - MIN_WIN_RATE;
 
   static double getNewScore(Rating p1, Rating p2, double ratio){
-    double factor = pow(MAX_ELO - p1.score, 2) / 100000.0;
-    double variance = 1 + 10 / sqrt(p1.gamesPlayed + 1);
-    double varianceOp = 1 + 10 / sqrt(p2.gamesPlayed + 1);
-    double expFactor = pow(variance, 1.5) / varianceOp;
+    double factor = 20.0;//pow(MAX_ELO - p1.score, 2) / 100000.0;
+    double expFactor = pow(p1.getVariance(), 1.5) / p2.getVariance();
     double realFactor = expFactor * factor;
     double difference = (p1.score - p2.score).toDouble();
     double absDifference = difference < 0 ? -difference : difference;
@@ -35,5 +33,7 @@ class Elo {
     }
     m.player1.rating.gamesWon += m.score1;
     m.player2.rating.gamesWon += m.score2;
+    m.player1.rating.startDate = m.date;
+    m.player2.rating.startDate = m.date;
   }
 }

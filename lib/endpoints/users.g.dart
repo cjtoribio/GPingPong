@@ -12,6 +12,10 @@ class JaguarUsers implements RequestHandler {
     const Route(
         path: '/',
         methods: const <String>['GET'],
+        headers: const {'Access-Control-Allow-Origin': '*'}),
+    const Route(
+        path: '/rating-history/:ldap',
+        methods: const <String>['GET'],
         headers: const {'Access-Control-Allow-Origin': '*'})
   ];
 
@@ -42,6 +46,32 @@ class JaguarUsers implements RequestHandler {
         rRouteResponse0.headers
             .set('content-type', 'text/plain; charset=utf-8');
         rRouteResponse0.value = _internal.getUsers();
+        Response<String> rRouteResponse1 = iEncodeToJson0.post(
+          rRouteResponse0,
+        );
+        return rRouteResponse1;
+      } catch (e) {
+        await iEncodeToJson0?.onException();
+        rethrow;
+      }
+    }
+
+//Handler for getRatingHistory
+    match = routes[1]
+        .match(request.uri.path, request.method, prefix, ctx.pathParams);
+    if (match) {
+      Response<Map> rRouteResponse0 = new Response(null);
+      EncodeToJson iEncodeToJson0;
+      try {
+        final RouteWrapper wEncodeToJson0 = _internal.jsonEncoder();
+        iEncodeToJson0 = wEncodeToJson0.createInterceptor();
+        rRouteResponse0.statusCode = 200;
+        rRouteResponse0.headers['Access-Control-Allow-Origin'] = '*';
+        rRouteResponse0.headers
+            .set('content-type', 'text/plain; charset=utf-8');
+        rRouteResponse0.value = _internal.getRatingHistory(
+          (ctx.pathParams.getField('ldap')),
+        );
         Response<String> rRouteResponse1 = iEncodeToJson0.post(
           rRouteResponse0,
         );

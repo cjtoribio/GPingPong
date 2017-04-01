@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:GPingPong/model/rating.dart';
 import 'package:GPingPong/model/single_match.dart';
 import 'package:angular2/core.dart';
 import 'package:GPingPong/model/user.dart';
@@ -9,7 +10,7 @@ import 'package:http/http.dart';
 @Injectable()
 class UserService {
 
-  static const _usersUrl = 'http://localhost:8888/api/users/'; // URL to web API
+  static const _usersUrl = 'http://localhost:8080/api/users/'; // URL to web API
 
   final BrowserClient _http;
 
@@ -43,6 +44,18 @@ class UserService {
           new User.fromJson(props)
       );
       return users;
+    } catch (e) {
+      throw _handleError(e);
+    }
+  }
+
+  Future<List<Rating>> getUserRating(User u) async {
+    try {
+      final response = await _http.get('$_usersUrl/rating-history/' + u.ldap);
+      List<Rating> ratings = _extractData(response).map((props) =>
+        new Rating.fromJson(props)
+      );
+      return ratings;
     } catch (e) {
       throw _handleError(e);
     }

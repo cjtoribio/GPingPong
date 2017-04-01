@@ -9,7 +9,7 @@ import 'package:http/http.dart';
 @Injectable()
 class MatchService {
 
-  static const _usersUrl = 'http://localhost:8888/api/matches/'; // URL to web API
+  static const _usersUrl = 'http://localhost:8080/api/matches/'; // URL to web API
 
   final BrowserClient _http;
 

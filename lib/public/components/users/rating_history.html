@@ -1,0 +1,18 @@
+<modal #wrappingModal>
+    <material-dialog [autoDismissable]="true" (dismiss)="close()">
+
+        <h3 header>
+            Rating History
+        </h3>
+
+        <rating-chart #ratingChart width="500px" height="250px"></rating-chart>
+
+        <div footer>
+            <material-button autoFocus
+                             clear-size
+                             (trigger)="wrappingModal.close()">
+                Close
+            </material-button>
+        </div>
+    </material-dialog>
+</modal>

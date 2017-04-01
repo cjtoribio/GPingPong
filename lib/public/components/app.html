@@ -1,0 +1,30 @@
+<h1>G Ping Pong</h1>
+<!--<a [routerLink]="['Users']">Heroes</a>-->
+<!--<material-tab-strip [tabLabels]="tabLabels"-->
+                    <!--(tabChange)="onTabChange($event)">-->
+<!--</material-tab-strip>-->
+<!--<material-tab>-->
+    <!--<router-outlet></router-outlet>-->
+<!--</material-tab>-->
+
+<material-tab-panel>
+    <material-tab label="Users" >
+        <users-component [ngStyle]="{'width': '100%'}">
+        </users-component>
+    </material-tab>
+    <material-tab label="Matches">
+        <matches-component [ngStyle]="{'width': '100%'}">
+        </matches-component>
+    </material-tab>
+</material-tab-panel>
+
+<material-fab raised
+              style="float:right;margin:10px;"
+              [class]="'blue'"
+              (click)="newMatchDialog.open()"
+              aria-label="add">
+    <glyph icon="add"></glyph>
+</material-fab>
+
+<new-match-dialog #newMatchDialog>
+</new-match-dialog>

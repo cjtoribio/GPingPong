@@ -5,6 +5,7 @@ import 'dart:async';
 import 'dart:collection';
 import 'dart:io';
 import 'dart:convert';
+import 'package:GPingPong/db/database.dart';
 import 'package:GPingPong/model/rating.dart';
 import 'package:GPingPong/model/single_match.dart';
 import 'package:GPingPong/service/elo.dart';
@@ -27,38 +28,10 @@ class Matches {
   @Wrap(const [#jsonEncoder])
   Map getMatches() {
     try {
-      return {'data': processFile()};
+      return {'data': Database.getInstance().matches};
     } catch (e) {
       print(e);
     }
   }
 
 }
-
-
-List<SingleMatch> processFile(){
-  var file = new File("/Users/cjtoribio/IdeaProjects/GPingPong/historial.csv");
-  var lines = file.readAsLinesSync();
-  HashMap<String, User> hm = new HashMap<String, User>();
-  List<SingleMatch> matches = [];
-  for(var line in lines) {
-    var spLine = line.split(',');
-    String name1 = spLine[0];
-    String name2 = spLine[1];
-    if (!hm.containsKey(name1)) {
-      hm[name1] = new User(name1, name1);
-    }
-    if (!hm.containsKey(name2)) {
-      hm[name2] = new User(name2, name2);
-    }
-    int score1 = int.parse(spLine[3]);
-    int score2 = int.parse(spLine[4]);
-    hm[name1] = hm[name1].clone();
-    hm[name2] = hm[name2].clone();
-    SingleMatch m = new SingleMatch(hm[name1], hm[name2], score1, score2);
-    Elo.updateRating(m);
-    matches.add(m);
-  }
-  return matches;
-}
-

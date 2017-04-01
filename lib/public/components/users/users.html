@@ -1,0 +1,23 @@
+<div [ngStyle]="{'flex-direction': 'column'}">
+    <div>
+        <material-input label="Search User"
+                        [(ngModel)]="searchCriteria"
+                        [trailingGlyph]="searchCriteria == '' ? 'search' : 'close'">
+
+        </material-input>
+    </div>
+    <div class="user-list">
+        <user-row *ngFor="let user of (getUsers() | filter:searchCriteria)"
+                  [user]="user"
+                  class="user-row"
+                  (showRating)="showRating($event)">
+        </user-row>
+        <h3>Unranked users</h3>
+        <unrated-user-row *ngFor="let user of (getUnratedUsers() | filter:searchCriteria)"
+                          [user]="user"
+                          class="user-row">
+        </unrated-user-row>
+    </div>
+</div>
+<rating-history-dialog #ratingDialog>
+</rating-history-dialog>

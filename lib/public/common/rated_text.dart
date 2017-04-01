@@ -2,13 +2,11 @@
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
 import 'package:angular2/core.dart';
-import 'package:GPingPong/public/service/user_service.dart';
-import 'package:GPingPong/model/user.dart';
 import 'package:angular2_components/angular2_components.dart';
 
 @Component(
   selector: 'rated-text',
-//  styleUrls: const ['app_component.css'],
+//  styleUrls: const ['app.css'],
   templateUrl: 'rated_text.html',
   directives: const [materialDirectives],
   providers: const [materialProviders],

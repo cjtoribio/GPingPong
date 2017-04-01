@@ -1,0 +1,26 @@
+<div [ngStyle]="{'flex-direction': 'column'}">
+    <div>
+        <material-input label="Search User"
+                        [(ngModel)]="searchCriteria"
+                        [trailingGlyph]="searchCriteria == '' ? 'search' : 'close'">
+
+        </material-input>
+    </div>
+    <div [ngStyle]="{
+                         'overflow': 'scroll',
+                         'max-height': '300px'}">
+        <div *ngFor="let match of (getMatches() | filter:searchCriteria)"
+             [ngStyle]="{'border-bottom': '1px solid #aaa',
+                                 padding: '10px',
+                                 overflow: 'auto',
+                                 position: 'relative'}">
+            <center>
+                <rated-text [score]="match.player1.rating.score"
+                            [ngStyle]="{position: 'absolute', left:'5px'}">{{match.player1.name}}</rated-text>
+                <span>{{match.score1}} - {{match.score2}}</span>
+                <rated-text [score]="match.player2.rating.score"
+                            [ngStyle]="{position: 'absolute', right:'5px'}">{{match.player2.name}}</rated-text>
+            </center>
+        </div>
+    </div>
+</div>
